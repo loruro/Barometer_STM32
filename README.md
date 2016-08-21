@@ -21,7 +21,7 @@ Specification taken from datasheets:
 | Interface                   | SPI               | I²C              |
 | Supply voltage              | 2.375 V – 5.5 V   | 1.8 V – 3.6 V    |
 | Operating Temperature Range | -40 °C to +105 °C | -40 °C to +85 °C |
-As we can see datasheets declare that BMP180 is much better than MPL115A1.
+As we can see, datasheets declare that BMP180 is much better in terms of accuracy and resolution than MPL115A1.
 
 ## Software
 
@@ -31,12 +31,49 @@ Procedure of measuring pressure was based upon sensors datasheet.
 First thing is to read calibration coefficients stored inside both of sensors. These coefficients are unique for every piece of sensor. They are read once, at the program initialization. They will be needed later.
 
 Second thing is to send control command to sensor so it will start temperature and pressure conversion (both sensors measure temperature because it is necessary for correct pressure calculation).  
-In case of MPL115A1 there is one command which starts conversion of both pressure and temperature. After 3 ms both values are ready and can be read from sensor.  
-In case of BMP180 there are separate commands for pressure and temperature conversion. Both conversions store measured value inside the same register so it have to be read after each conversion. Conversion time for temperature equals 4.5 ms. In case of pressure, conversion command contains value specifying accuracy of measurement. It is called oversampling rate and it ranges between 0 and 3. Conversion time depends on this value and ranges between 4.5 ms and 25.5 ms.  
-In this project I used simple delay function to wait for an end of pressure and temperature conversions. Because of simplicity of program this approach works correctly. For more complex applications delay functions are unacceptable and different methods should be used (e.g. interrupts).
+In case of MPL115A1, there is one command which starts conversion of both pressure and temperature. After 3 ms both values are ready and can be read from sensor.  
+In case of BMP180, there are separate commands for pressure and temperature conversion. Both conversions store measured value inside the same register so it have to be read after each conversion. Conversion time for temperature equals 4.5 ms. In case of pressure, conversion command contains value specifying accuracy of measurement. It is called oversampling rate and it ranges between 0 and 3. Conversion time depends on this value and ranges between 4.5 ms and 25.5 ms.  
+In this project I used simple delay function to wait for an end of pressure and temperature conversions. Because of simplicity of program, this approach works correctly. For more complex applications delay functions are unacceptable and different methods should be used (e.g. timers, interrupts).
 
 After successful conversion, correct value of pressure has to be calculated. Formulas are given in datasheets. For these calculations all data previously read from sensor is used: pressure, temperature and coefficients. As a bonus, correct value of temperature measured by BMP180 sensor can also be calculated. Thanks to proper formula inside datasheet.
 
 To increase accuracy, arithmetic mean value is calculated of every 16 measurements. Afterwards, values are sent to PC by UART interface.  
 After each measurement, state of LEDs on Discovery board is changed so the light jumps and draws circlelike shape.  
 There is also simpe error handling implemented. If error occurs (e.g. connection between Discovery board and sensor brokes), program will stop performing measurements and will blink onboard LEDs.
+
+## Tests
+
+For the most of the tests, BMP180 used oversampling rate 3.
+
+First test was to compare both sensors with commercial, home weather station.
+<div align="center"><img src="img/Weather_station.jpg" width="240"/></div>
+Measurements for all devices were done in the same time:
+
+|                 | Pressure | Temperature |
+| --------------- |:--------:| :---------: |
+| MPL115A1        | 967 hPa  | ---         |
+| BMP180          | 973 hPa  | 24.9 °C     |
+| Weather station | 964 hPa  | 23.0 °C     |
+All devices gave different results. I couldn't decide which was the most correct.  
+
+Second test involved comparing results of MPL115A1 and BMP180 sensors while altitude was changing. I chose two relatively high building inside the campus of my university [AGH University of Science and Technology](http://www.agh.edu.pl/en):
+<table align="center">
+  <tr>
+    <td>
+      <img src="img/AGH_Kapitol.png" width="240"/>
+    </td>
+    <td>
+      <img src="img/AGH_B5.jpg" width="240"/>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      Kapitol<br>
+      <sub>Source: <a href="https://pl.wikipedia.org/wiki/Miasteczko_Studenckie_AGH">Wikipedia</a></sub>
+    </td>
+    <td align="center">
+      B5<br>
+      <sub>Source: <a href="http://www.skyscrapercity.com/showthread.php?t=297606&page=296">skyscrapercity.com</a></sub>
+    </td>
+  </tr>
+</table>
