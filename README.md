@@ -102,7 +102,7 @@ Third test involved leaving both sensors in stable environment for a few minutes
 
 </center>
 
-Some of the expected values are visibly missing. Also most of the histograms do not look like normal distribution. Only the histogram of BMP180 sensor with oversampling rate of 3 looks almost like Gaussian bell.
+Some of the expected values are visibly missing. Also most of the histograms do not look like normal distribution. Only the histogram of BMP180 sensor with oversampling rate of 3 looks almost like Gaussian bell. This could be caused by a bug in software, hardware or not proper power supply of pressure sensors.
 
 ## Conclusion
 
