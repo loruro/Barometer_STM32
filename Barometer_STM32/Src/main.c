@@ -37,7 +37,7 @@
 /**
   ******************************************************************************
   * @file    main.c
-  * @author  Karol Leszczyñski
+  * @author  Karol LeszczyÅ„ski
   * @version V1.0.0
   * @date    14-August-2016
   * @brief   Main file of Barometer_STM32 program.
@@ -140,13 +140,13 @@ int main(void)
   mpl115a1Device.csPin = KAMODBAR_SPI_CS_Pin;
   status = mpl115a1ReadCoefficients(&mpl115a1Device);
   if (status != HAL_OK)
-      Error_Handler();
+    Error_Handler();
 
   uint8_t uartMessage[] = "MPL115A1_Pressure;BMP180_Pressure;BMP180_Temperature\n\r";
   size_t messageSize = strlen(uartMessage) * sizeof(uartMessage[0]);
   status = HAL_UART_Transmit(&huart5, uartMessage, messageSize, 1000);
   if (status != HAL_OK)
-        Error_Handler();
+    Error_Handler();
 
   while (1)
   {
@@ -159,11 +159,11 @@ int main(void)
     {
       status = bmp180ReadMeasurements(&bmp180Device);
       if (status != HAL_OK)
-	Error_Handler();
+        Error_Handler();
 
       status = mpl115a1ReadMeasurements(&mpl115a1Device);
       if (status != HAL_OK)
-	Error_Handler();
+        Error_Handler();
 
       bmp180Pressure += bmp180Device.pressure;
       bmp180Temperature += bmp180Device.temperature;
@@ -178,7 +178,7 @@ int main(void)
     mpl115a1Pressure = round(mpl115a1Pressure * 1000.0);
 
     sprintf(uartMessage, "%lu;%lu;%lu\n\r", (uint32_t)mpl115a1Pressure,
-	    (uint32_t)bmp180Pressure, (uint32_t)bmp180Temperature);
+            (uint32_t)bmp180Pressure, (uint32_t)bmp180Temperature);
     messageSize = strlen(uartMessage) * sizeof(uartMessage[0]);
     status = HAL_UART_Transmit (&huart5, uartMessage, messageSize, 1000);
     if (status != HAL_OK)

@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    bmp180.h
-  * @author  Karol Leszczyñski
+  * @author  Karol LeszczyÅ„ski
   * @version V1.0.0
   * @date    14-August-2016
   * @brief   Header file of BMP180 sensor driver.

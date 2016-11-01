@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    mpl115a1.h
-  * @author  Karol Leszczyñski
+  * @author  Karol LeszczyÅ„ski
   * @version V1.0.0
   * @date    14-August-2016
   * @brief   MPL115A1 sensor driver.
@@ -37,8 +37,8 @@
   * @retval HAL status.
   */
 HAL_StatusTypeDef mpl115a1ReadRawMeasurements(mpl115a1Device *device,
-					      uint16_t *pressureRaw,
-					      uint16_t *temperatureRaw);
+                                              uint16_t *pressureRaw,
+                                              uint16_t *temperatureRaw);
 
 /**
   * @brief  Calculates real pressure value using sampled raw pressure and temperature data.
@@ -50,11 +50,11 @@ HAL_StatusTypeDef mpl115a1ReadRawMeasurements(mpl115a1Device *device,
   * @retval HAL status.
   */
 void mpl115a1calculatePressure(mpl115a1Device *device, uint16_t pressureRaw,
-			       uint16_t temperatureRaw);
+                               uint16_t temperatureRaw);
 
 HAL_StatusTypeDef mpl115a1ReadRawMeasurements(mpl115a1Device *device,
-					      uint16_t *pressureRaw,
-					      uint16_t *temperatureRaw)
+                                              uint16_t *pressureRaw,
+                                              uint16_t *temperatureRaw)
 {
   HAL_StatusTypeDef status;
   uint8_t zero = 0;
@@ -82,7 +82,7 @@ HAL_StatusTypeDef mpl115a1ReadRawMeasurements(mpl115a1Device *device,
       return status;
 
     status = HAL_SPI_TransmitReceive(device->handle, &zero, &data[i],
-				     sizeof(zero), 1000);
+                                     sizeof(zero), 1000);
     if (status != HAL_OK)
       return status;
   }
@@ -96,7 +96,7 @@ HAL_StatusTypeDef mpl115a1ReadRawMeasurements(mpl115a1Device *device,
 }
 
 void mpl115a1calculatePressure(mpl115a1Device *device, uint16_t pressureRaw,
-			       uint16_t temperatureRaw)
+                               uint16_t temperatureRaw)
 {
   int32_t c12x2, a1, a1x1, y1, a2x2, PComp;
   int16_t c12 = device->coefficients.c12;
@@ -147,8 +147,8 @@ HAL_StatusTypeDef mpl115a1ReadCoefficients(mpl115a1Device *device)
       return status;
 
     status = HAL_SPI_TransmitReceive(device->handle, &zero,
-				     &coefficientRegisters[i], sizeof(zero),
-				     1000);
+                                     &coefficientRegisters[i], sizeof(zero),
+                                     1000);
     if (status != HAL_OK)
       return status;
   }

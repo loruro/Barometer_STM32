@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    mpl115a1.h
-  * @author  Karol Leszczyñski
+  * @author  Karol LeszczyÅ„ski
   * @version V1.0.0
   * @date    14-August-2016
   * @brief   Header file of MPL115A1 sensor driver.

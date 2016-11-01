@@ -1,7 +1,7 @@
 /**
   ******************************************************************************
   * @file    bmp180.c
-  * @author  Karol Leszczyñski
+  * @author  Karol LeszczyÅ„ski
   * @version V1.0.0
   * @date    14-August-2016
   * @brief   BMP180 sensor driver.
@@ -36,7 +36,7 @@
   * @retval HAL status.
   */
 HAL_StatusTypeDef bmp180ReadRawTemperature(bmp180Device *device,
-					   int32_t *temperatureRaw);
+                                           int32_t *temperatureRaw);
 
 /**
   * @brief  Reads raw pressure data from BMP180 sensor.
@@ -46,7 +46,7 @@ HAL_StatusTypeDef bmp180ReadRawTemperature(bmp180Device *device,
   * @retval HAL status.
   */
 HAL_StatusTypeDef bmp180ReadRawPressure(bmp180Device *device,
-					int32_t *pressureRaw);
+                                        int32_t *pressureRaw);
 
 /**
   * @brief  Reads raw pressure and temperature data from BMP180 sensor.
@@ -57,8 +57,8 @@ HAL_StatusTypeDef bmp180ReadRawPressure(bmp180Device *device,
   * @retval HAL status.
   */
 HAL_StatusTypeDef bmp180ReadRawMeasurements(bmp180Device *device,
-					    int32_t *pressureRaw,
-					    int32_t *temperatureRaw);
+                                            int32_t *pressureRaw,
+                                            int32_t *temperatureRaw);
 
 /**
   * @brief  Calculates real temperature value using sampled raw temperature data.
@@ -70,7 +70,7 @@ HAL_StatusTypeDef bmp180ReadRawMeasurements(bmp180Device *device,
   * @retval HAL status.
   */
 void bmp180calculateTemperature(bmp180Device *device, int32_t temperatureRaw,
-				int32_t *b5);
+                                int32_t *b5);
 
 /**
   * @brief  Calculates real pressure value using sampled raw pressure data and
@@ -83,17 +83,17 @@ void bmp180calculateTemperature(bmp180Device *device, int32_t temperatureRaw,
   * @retval HAL status.
   */
 void bmp180calculatePressure(bmp180Device *device, int32_t pressureRaw,
-			     int32_t b5);
+                             int32_t b5);
 
 HAL_StatusTypeDef bmp180ReadRawTemperature(bmp180Device *device,
-					   int32_t *temperatureRaw)
+                                           int32_t *temperatureRaw)
 {
   HAL_StatusTypeDef status;
   uint8_t convCmd = BMP180_CONTROL_TEMP_CONV;
 
   status = HAL_I2C_Mem_Write(device->handle, BMP180_I2C_ADDRESS,
-			     BMP180_CONTROL_ADDRESS, 1, &convCmd,
-			     sizeof(convCmd), 1000);
+                             BMP180_CONTROL_ADDRESS, 1, &convCmd,
+                             sizeof(convCmd), 1000);
   if (status != HAL_OK)
     return status;
   // Waiting for sampling to finish.
@@ -101,25 +101,25 @@ HAL_StatusTypeDef bmp180ReadRawTemperature(bmp180Device *device,
 
   uint8_t data[2];
   status = HAL_I2C_Mem_Read(device->handle, BMP180_I2C_ADDRESS,
-			    BMP180_MEASUR_START_ADDRES, 1, data, sizeof(data),
-			    1000);
+                            BMP180_MEASUR_START_ADDRES, 1, data, sizeof(data),
+                            1000);
   if (status != HAL_OK)
-      return status;
+    return status;
   *temperatureRaw = (uint32_t)data[0] << 8 | data[1];
 
   return HAL_OK;
 }
 
 HAL_StatusTypeDef bmp180ReadRawPressure(bmp180Device *device,
-					int32_t *pressureRaw)
+                                        int32_t *pressureRaw)
 {
   HAL_StatusTypeDef status;
   uint8_t oss = device->oversampling;
   uint8_t convCmd = BMP180_CONTROL_PRESS_CONV + (oss << 6);
 
   status = HAL_I2C_Mem_Write(device->handle, BMP180_I2C_ADDRESS,
-			     BMP180_CONTROL_ADDRESS, 1, &convCmd,
-			     sizeof(convCmd), 1000);
+                             BMP180_CONTROL_ADDRESS, 1, &convCmd,
+                             sizeof(convCmd), 1000);
   if (status != HAL_OK)
     return status;
   // Waiting for sampling to finish.
@@ -141,8 +141,8 @@ HAL_StatusTypeDef bmp180ReadRawPressure(bmp180Device *device,
 
   uint8_t data[3];
   status = HAL_I2C_Mem_Read(device->handle, BMP180_I2C_ADDRESS,
-			    BMP180_MEASUR_START_ADDRES, 1, data, sizeof(data),
-			    1000);
+                            BMP180_MEASUR_START_ADDRES, 1, data, sizeof(data),
+                            1000);
   if (status != HAL_OK)
     return status;
   *pressureRaw = ((uint32_t)data[0] << 16 | data[1] << 8 | data[2]) >> (8 - oss);
@@ -151,8 +151,8 @@ HAL_StatusTypeDef bmp180ReadRawPressure(bmp180Device *device,
 }
 
 HAL_StatusTypeDef bmp180ReadRawMeasurements(bmp180Device *device,
-					    int32_t *pressureRaw,
-					    int32_t *temperatureRaw)
+                                            int32_t *pressureRaw,
+                                            int32_t *temperatureRaw)
 {
   HAL_StatusTypeDef status;
   status = bmp180ReadRawTemperature(device, temperatureRaw);
@@ -161,13 +161,13 @@ HAL_StatusTypeDef bmp180ReadRawMeasurements(bmp180Device *device,
 
   status = bmp180ReadRawPressure(device, pressureRaw);
   if (status != HAL_OK)
-      return status;
+    return status;
 
   return HAL_OK;
 }
 
 void bmp180calculateTemperature(bmp180Device *device, int32_t temperatureRaw,
-				int32_t *b5)
+                                int32_t *b5)
 {
   int32_t x1, x2;
   uint16_t ac6 = device->coefficients.ac6;
@@ -182,7 +182,7 @@ void bmp180calculateTemperature(bmp180Device *device, int32_t temperatureRaw,
 }
 
 void bmp180calculatePressure(bmp180Device *device, int32_t pressureRaw,
-			     int32_t b5)
+                             int32_t b5)
 {
   int32_t x1, x2, x3, b6, b3, p;
   uint32_t b4, b7;
@@ -235,9 +235,9 @@ HAL_StatusTypeDef bmp180ReadCoefficients(bmp180Device *device)
   uint8_t coefficientRegisters[BMP180_COEFF_NUMBER];
 
   status = HAL_I2C_Mem_Read(device->handle, BMP180_I2C_ADDRESS,
-			       BMP180_COEFF_START_ADDRESS, 1,
-			       coefficientRegisters,
-			       sizeof(coefficientRegisters), 1000);
+                            BMP180_COEFF_START_ADDRESS, 1,
+                            coefficientRegisters,
+                            sizeof(coefficientRegisters), 1000);
   if (status != HAL_OK)
     return status;
 
@@ -245,9 +245,9 @@ HAL_StatusTypeDef bmp180ReadCoefficients(bmp180Device *device)
   for(uint8_t i = 0; i < BMP180_COEFF_NUMBER / 2; i++)
   {
     uint16_t coefficient = coefficientRegisters[2 * i] << 8
-	| coefficientRegisters[2 * i + 1];
+        | coefficientRegisters[2 * i + 1];
     if (coefficient == 0 || coefficient == 0xFFFF)
-	return HAL_ERROR;
+      return HAL_ERROR;
   }
 
   device->coefficients.ac1 = coefficientRegisters[0] << 8
