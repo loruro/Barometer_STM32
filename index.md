@@ -89,7 +89,6 @@ Third test involved leaving both sensors in stable environment for a few minutes
 
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/09.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/10.png" width="420"/> |
 | :-------------------------------------------------: |:---------------------------------------------------:|
-
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/11.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/12.png" width="420"/> |
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/13.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/14.png" width="420"/> |
 
