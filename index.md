@@ -82,17 +82,16 @@ where:
 
 Results:
 
-<center>
+
 
 | Pressure                                            | Temperature                                         |
-
 | :-------------------------------------------------: |:---------------------------------------------------:|
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/01.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/02.png" width="420"/> |
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/03.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/04.png" width="420"/> |
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/05.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/06.png" width="420"/> |
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/07.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/08.png" width="420"/> |
 
-</center>
+
 
 As we can see, measurements from BMP180 were much more stable. There is significant offset between sensors. Also the curve created from barometric formula is quite well aligned for both sensors.
 
