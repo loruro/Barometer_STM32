@@ -21,6 +21,7 @@ Specification taken from datasheets:
 | Interface                   | SPI               | I²C              |
 | Supply voltage              | 2.375 V – 5.5 V   | 1.8 V – 3.6 V    |
 | Operating Temperature Range | -40 °C to +105 °C | -40 °C to +85 °C |
+
 As we can see, datasheets declare that BMP180 is much better in terms of accuracy and resolution than MPL115A1.
 
 ## Software
@@ -54,6 +55,7 @@ Measurements for all devices were done in the same time:
 | MPL115A1        | 967 hPa  | ---         |
 | BMP180          | 973 hPa  | 24.9 °C     |
 | Weather station | 964 hPa  | 23.0 °C     |
+
 All devices gave different results. I couldn't decide which was the most correct.  
 
 Second test involved comparing results of MPL115A1 and BMP180 sensors while altitude was changing. I chose two relatively high buildings inside the campus of my university [AGH University of Science and Technology](http://www.agh.edu.pl/en):
@@ -61,7 +63,9 @@ Second test involved comparing results of MPL115A1 and BMP180 sensors while alti
 <center>
 
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/img/AGH_Kapitol.png" width="240"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/img/AGH_B5.jpg" width="240"/> |
+
 | :------------------------------------------: |:---------------------------------------:|
+
 | Kapitol<br><sub>Source: <a href="https://pl.wikipedia.org/wiki/Miasteczko_Studenckie_AGH">Wikipedia</a></sub> | B5<br><sub>Source: <a href="http://www.skyscrapercity.com/showthread.php?t=297606&page=296">skyscrapercity.com</a></sub> |
 
 </center>
@@ -81,6 +85,7 @@ Results:
 <center>
 
 | Pressure                                            | Temperature                                         |
+
 | :-------------------------------------------------: |:---------------------------------------------------:|
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/01.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/02.png" width="420"/> |
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/03.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/04.png" width="420"/> |
@@ -97,6 +102,7 @@ Third test involved leaving both sensors in stable environment for a few minutes
 
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/09.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/10.png" width="420"/> |
 | :-------------------------------------------------: |:---------------------------------------------------:|
+
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/11.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/12.png" width="420"/> |
 | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/13.png" width="420"/> | <img src="https://raw.githubusercontent.com/loruro/Barometer_STM32/master/measurements/charts/14.png" width="420"/> |
 
